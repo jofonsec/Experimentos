@@ -1,0 +1,46 @@
+#!/bin/bash
+algoritmo=("AX-SVN" "AX-SWAP" "AX-UM" "SBX-SVN" "SBX-SWAP" "SBX-UM" "UX-SVN" "UX-SWAP" "UX-UM")
+minuscula=("ax-svn" "ax-swap" "ax-um" "sbx-svn" "sbx-swap" "sbx-um" "ux-svn" "ux-swap" "ux-um")
+ejecution=6
+echo Comienzan las Pruebas
+cont=1
+contador=1
+cd ~/GitHub/Experimentos/build/application
+
+for index in ${!algoritmo[*]}
+do
+	until [ $contador -eq 4 ];
+	do
+		mv Matriz$contador.txt Matriz.txt
+		mv Allposition$contador.txt Allposition.txt	
+		mv Anclas$contador.txt Anclas.txt
+
+		mkdir M$contador-AGS-${algoritmo[$index]}
+		until [ $cont -eq $ejecution ];
+		do
+			echo Comienza la ejecucion de AGS-${algoritmo[$index]}-$cont
+			mkdir AGS-${algoritmo[$index]}-$cont
+			./AGS-${algoritmo[$index]} @ags-${minuscula[$index]}.param >> Tiempo.sav
+			sed -i "1,10002d" Tiempo.sav
+			mv *.sav AGS-${algoritmo[$index]}-$cont
+			mv *.xg AGS-${algoritmo[$index]}-$cont
+			mv AGS-${algoritmo[$index]}-$cont M$contador-AGS-${algoritmo[$index]} 
+			let cont=cont+1
+		done
+		mv Matriz.txt Matriz$contador.txt 
+		mv Allposition.txt Allposition$contador.txt 	
+		mv Anclas.txt Anclas$contador.txt 
+		let contador=contador+1
+		cont=1
+	done
+	echo Fin ejecucion AGS-${algoritmo[$index]}
+	mkdir AGS-${algoritmo[$index]}-All
+	mv M1-AGS-${algoritmo[$index]} AGS-${algoritmo[$index]}-All
+	mv M2-AGS-${algoritmo[$index]} AGS-${algoritmo[$index]}-All
+	mv M3-AGS-${algoritmo[$index]} AGS-${algoritmo[$index]}-All
+	cont=1
+	contador=1
+done
+
+
+#Se deben dar los derechos de ejecucion chmod +x nombre-script

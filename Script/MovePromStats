@@ -1,0 +1,40 @@
+#!/bin/bash
+#Se deben dar los derechos de ejecucion chmod +x nombre-script
+echo Comienzan las Pruebas
+algoritmo=("AX-SVN" "AX-SWAP" "AX-UM" "SBX-SVN" "SBX-SWAP" "SBX-UM" "UX-SVN" "UX-SWAP" "UX-UM")
+
+cont=1
+contador=1
+
+cd /home/jose/GitHub/Experimentos/build/application/Script-2
+for index in ${!algoritmo[*]}
+do
+	cd AGS-${algoritmo[$index]}-All
+	until [ $contador -eq 4 ];
+	do
+		cd M$contador-AGS-${algoritmo[$index]}
+		until [ $cont -eq 2 ];
+		do
+			cd Promedio
+			cp /home/jose/GitHub/Experimentos/Script/promstats promstats
+			cd .. 
+			let cont=cont+1
+		done
+		cd ..
+		let contador=contador+1
+		cont=1
+	done
+	cd ..
+cont=1
+contador=1
+done
+
+#/home/jose/GitHub/Experimentos/build/application/M1-AGS-AX-UM/Promedio/
+#/home/jose/GitHub/Experimentos/build/application/M1-AGS-SBX-SVN/Promedio/
+#/home/jose/GitHub/Experimentos/build/application/M1-AGS-SBX-SWAP/Promedio/
+#/home/jose/GitHub/Experimentos/build/application/M1-AGS-SBX-UM/Promedio/
+#/home/jose/GitHub/Experimentos/build/application/M1-AGS-UX-SVN/Promedio/
+#/home/jose/GitHub/Experimentos/build/application/M1-AGS-UX-SWAP/Promedio/
+#/home/jose/GitHub/Experimentos/build/application/M1-AGS-UX-UM/Promedio/
+
+

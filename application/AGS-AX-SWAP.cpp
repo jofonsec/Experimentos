@@ -35,7 +35,7 @@ int main (int argc, char* argv[]){
     unsigned int nodos = parser.createParam((unsigned int)(100), "Nodos", "Total de nodos",'N',"Parametros Escenario").value();
     double radio = parser.createParam((double)(5), "Radio", "Radio de comunicacion",'R',"Parametros Escenario").value();
 
-    double DisReal[200][200];
+    double DisReal[500][500];
     double vecAnclas[NoAnclas*2];
 
 //Configuracion parametros algoritmo

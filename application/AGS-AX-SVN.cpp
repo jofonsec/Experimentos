@@ -35,14 +35,14 @@ int main (int argc, char* argv[]){
     unsigned int nodos = parser.createParam((unsigned int)(100), "Nodos", "Total de nodos",'N',"Parametros Escenario").value();
     double radio = parser.createParam((double)(5), "Radio", "Radio de comunicacion",'R',"Parametros Escenario").value();
 
-    double DisReal[200][200];
+    double DisReal[500][500];
     double vecAnclas[NoAnclas*2];
 
 //Configuracion parametros algoritmo
     unsigned int POP_SIZE = parser.createParam((unsigned int)(100), "PopSize", "Tamano de la poblacion",'P',"Parametros Algoritmo").value();
     unsigned int numberGeneration = parser.createParam((unsigned int)(1000), "MaxGen", "Criterio de parada, Numero maximo de generaciones",'G',"Parametros Algoritmo").value();
     unsigned int Nc = parser.createParam((unsigned int)(2), "Nc", "Constante del operador SBX",'C',"Parametros Algoritmo").value();
-    double Alpha = parser.createParam((double)(0.5), "Alpha", "Constante del operador Aritmetico",'C',"Parametros Algoritmo").value();
+    double Alpha = parser.createParam((double)(0.5), "Alpha", "Constante del operador Aritmetico AX",'C',"Parametros Algoritmo").value();
     float preferencia = parser.createParam((float)(0.5), "Preferencia", "Constante del operador Uniforme, define el sesgo",'C',"Parametros Algoritmo").value();
     double Pcruza = parser.createParam((double)(0.87), "Pcruza", "Probabilidad de cruzamiento SBX",'X',"Parametros Algoritmo").value();
     double epsilon = parser.createParam((double)(5), "Epsilon", "Rango de mutación",'F',"Parametros Algoritmo").value();
@@ -244,8 +244,6 @@ int main (int argc, char* argv[]){
            std::cout << "WARNING, Load file contained too many individuals. Only the best will be retained" << std::endl;
            poblacion.resize(POP_SIZE);
          }
-
-
     }
     else{
         //Para la inicializaci�n del cromosoma, primero se debe definir como se generaran los genes y la semilla
